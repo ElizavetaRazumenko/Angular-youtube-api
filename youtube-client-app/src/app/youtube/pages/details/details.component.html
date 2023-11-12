@@ -1,0 +1,32 @@
+<main class="main_details">
+  <a routerLink="/">
+    <button
+      class="button_back"
+      appButtonColor
+      [publishAt]="currentItem.snippet.publishedAt">
+      <div class="arrow_back"></div>
+    </button>
+  </a>
+  <div class="details_container">
+    <img
+      [src]="currentItem.snippet.thumbnails.high.url"
+      alt="video"
+      class="video_img" />
+    <div
+      class="details_content"
+      appHighlight
+      [publishAt]="currentItem.snippet.publishedAt">
+      <div class="title_container">
+        <p class="video_title">{{ currentItem.snippet.channelTitle }}</p>
+        <p class="date">
+          {{ currentItem.snippet.publishedAt | date: 'fullDate' }}
+        </p>
+      </div>
+      <p class="description_title">Description:</p>
+      <p class="description_content">{{ currentItem.snippet.title }}</p>
+      <app-statistic
+        [statistic]="currentItem.statistics"
+        class="statictic"></app-statistic>
+    </div>
+  </div>
+</main>

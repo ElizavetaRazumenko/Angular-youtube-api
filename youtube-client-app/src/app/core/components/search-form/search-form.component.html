@@ -1,0 +1,10 @@
+<form class="search-form" (ngSubmit)="sendFormInfo(searchInput.value)">
+  <input
+    #searchInput
+    type="text"
+    name="search"
+    id="search"
+    placeholder="What are you want to find out?"
+    class="search-input"
+    (input)="changeInputValue(searchInput.value)" />
+</form>

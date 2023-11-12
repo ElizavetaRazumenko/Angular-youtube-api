@@ -1,0 +1,16 @@
+<main class="main" *ngIf="mainPageService.isRequestSend">
+  <ng-container *ngIf="videos$ | async as videos">
+    <app-search-results-item
+      *ngFor="
+        let video of videos.items
+          | filterData
+            : mainPageService.isSortingDataTurn
+            : mainPageService.isSortDataFromLargestToSmallest
+          | filterViews
+            : mainPageService.isSortingViewsTurn
+            : mainPageService.isSortViewsFromLargestToSmallest
+          | filterWords: mainPageService.filterInputValue
+      "
+      [cardInfo]="video"></app-search-results-item>
+  </ng-container>
+</main>

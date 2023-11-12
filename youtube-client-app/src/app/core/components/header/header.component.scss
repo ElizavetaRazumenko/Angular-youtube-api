@@ -1,0 +1,47 @@
+@import '../../../global.scss';
+
+.header {
+    width: 100%;
+    background-color: $background-color;
+
+    .header-main {
+        display: grid;
+        height: 80px;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-areas: "login search user";
+        align-items: center;
+        
+        .login_button {
+            cursor: pointer;
+            justify-self: flex-end;
+            max-width: 60px;
+            grid-area: login;
+            color: $black;
+            border: none;
+            background-color: $background-color;
+            font-size: .75rem;
+            transition: .5s;
+
+            &:hover {
+                color: $font-grey;
+            }
+        }
+
+        .search-block {
+            grid-area: search; 
+            justify-self: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 570px;
+        }
+
+        .user {
+            grid-area: user; 
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}

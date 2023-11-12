@@ -1,0 +1,30 @@
+@import '../../../global.scss';
+
+.setting-button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: $blue-color;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 2px 0px 3px $blue-color;
+    transition: .5s;
+
+    &:hover {
+        background-color: $blue-color-hover;
+        box-shadow: 2px 0px 3px $blue-color-hover;
+    }
+
+    .setting-icon {
+        width: 15px;
+        height: 15px;
+        margin: 0 auto;
+        background-image: url('../../../../assets/settings.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+}
+
