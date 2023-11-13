@@ -6,9 +6,9 @@
 
 .login_form {
     box-sizing: border-box;
-    padding: 25px 20px;
+    padding: 35px 20px 25px;
     margin: auto;
-    width: 350px;
+    width: 432px;
     height: max-content;
     display: flex;
     flex-direction: column;
@@ -17,8 +17,9 @@
 
     .title {
         color: $black;
-        font-size: 1.125rem;
+        font-size: 1.437rem;
         font-weight: 700;
+        margin-bottom: 30px;
     }
 
     .input_label {
@@ -29,30 +30,30 @@
     }
 
     .input {
+        min-width: 100%;
         box-sizing: border-box;
         padding: 0 10px;
         border: none;
         background-color: $input-background;
-        width: 305px;
-        height: 37px;
+        height: 44px;
         margin-bottom: 5px;
     }
 
-    .button_login {
+    .button_create {
         cursor: pointer;
-        margin-right: 10px;
+        margin-right: 5px;
         border-radius: 5px;
-        margin-top: 25px;
+        margin-top: 45px;
         align-self: flex-end;
         border: none;
         color: $white-color;
         background-color: $blue-color;
-        width: 124px;
+        width: 188px;
         box-shadow: 5px 0px 3px $blue-color;
         transition: .5s;
-        font-size: .75rem;
+        font-size: .94rem;
         font-weight: 400;
-        height: 40px;
+        height: 37px;
 
         &:hover {
             background-color: $blue-color-hover;
@@ -62,11 +63,40 @@
 
 }
 
-.error-container {
+.input-button-container {
     display: flex;
+    justify-content: space-between;
 }
+
+.input-tag {
+    box-sizing: border-box;
+    padding: 0 10px;
+    border: none;
+    background-color: $input-background;
+    height: 44px;
+    margin-bottom: 5px;
+    width: 330px;
+}
+
+.add_button {
+    cursor: pointer;
+    color: $blue-color;
+    margin-right: 15px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+    padding: 5px 15px;
+    border: none;
+    transition: .5s; 
+
+    &:hover {
+        color: $blue-color-hover;
+    }
+}
+
 .error_message {
     color: $red;
     margin-left: 10px;
     font-size: 0.6rem;
+    min-height: 13px;
 }

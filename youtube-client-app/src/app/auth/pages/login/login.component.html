@@ -1,20 +1,60 @@
 <main class="login_main">
-  <form
-    class="login_form"
-    (ngSubmit)="submitForm(inputLogin.value, inputPassword.value)">
+  <form class="login_form" [formGroup]="loginForm" (ngSubmit)="submitForm()">
     <p class="title">Login</p>
     <label for="inputLogin" class="input_label">login</label>
     <input
       #inputLogin
       type="text"
       class="input"
+      formControlName="login"
       (keyup)="clearErrorMessage()" />
+    <div
+      *ngIf="
+        loginForm.controls.login.invalid &&
+        (loginForm.controls.login.dirty || loginForm.controls.login.touched)
+      "
+      class="error-container">
+      <span
+        *ngIf="
+          loginForm.controls.login.errors &&
+          loginForm.controls.login.errors['required']
+        "
+        class="error_message"
+        >{{ loginErrorMessage }}</span
+      >
+      <span
+        *ngIf="
+          loginForm.controls.login.errors &&
+          loginForm.controls.login.errors['email']
+        "
+        class="error_message"
+        >The login email is invalid</span
+      >
+    </div>
     <label for="inputPassword" class="input_label">password</label>
     <input
       #inputPassword
       type="password"
       class="input"
-      (keyup)="clearErrorMessage()" />
+      formControlName="password"
+      (keyup)="checkPasswordValidation()" />
+    <div
+      *ngIf="
+        loginForm.controls.password.invalid &&
+        (loginForm.controls.password.dirty ||
+          loginForm.controls.password.touched)
+      "
+      class="error-container">
+      <span
+        *ngIf="
+          loginForm.controls.password.errors &&
+          loginForm.controls.password.errors['required'] &&
+          errorMessage === ''
+        "
+        class="error_message"
+        >Please enter a password</span
+      >
+    </div>
     <span class="error_message">{{ errorMessage }}</span>
     <button class="button_login">Login</button>
   </form>
