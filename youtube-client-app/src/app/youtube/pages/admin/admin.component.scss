@@ -39,7 +39,8 @@
         margin-bottom: 5px;
     }
 
-    .button_create {
+    .button_create,
+    .button_reset {
         cursor: pointer;
         margin-right: 5px;
         border-radius: 5px;
@@ -61,11 +62,21 @@
         }
     }
 
+    .button_reset {
+        background-color: $red;
+        box-shadow: 5px 0px 3px $red;
+        &:hover {
+            background-color: #eb1b1b;
+            box-shadow: 5px 0px 3px #eb1b1b;
+        }
+    }
+
 }
 
 .input-button-container {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 5px;
 }
 
 .input-tag {
@@ -83,7 +94,7 @@
     color: $blue-color;
     margin-right: 15px;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1rem;
     box-sizing: border-box;
     padding: 5px 15px;
     border: none;
