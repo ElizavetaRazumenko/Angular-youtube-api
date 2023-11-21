@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import Item from 'src/app/search-responce/search-item.model';
+import { MainCard } from 'src/app/redux/models/main.models';
 
 @Pipe({
   name: 'filterData'
 })
 export class FilterDataPipe implements PipeTransform {
-  sortingCards: Item[] = [];
+  sortingCards: MainCard[] = [];
   public transform = (
-    cards: Item[],
+    cards: MainCard[],
     isSortingTurn: boolean,
     isSortFromLargestToSmallest: boolean
   ) => {
@@ -16,14 +16,14 @@ export class FilterDataPipe implements PipeTransform {
     if (isSortFromLargestToSmallest) {
       return this.sortingCards.sort(
         (cardA, cardB) =>
-          new Date(cardA.snippet.publishedAt).getTime() -
-          new Date(cardB.snippet.publishedAt).getTime()
+          new Date(cardA.publishedAt).getTime() -
+          new Date(cardB.publishedAt).getTime()
       );
     }
     return this.sortingCards.sort(
       (cardA, cardB) =>
-        new Date(cardB.snippet.publishedAt).getTime() -
-        new Date(cardA.snippet.publishedAt).getTime()
+        new Date(cardB.publishedAt).getTime() -
+        new Date(cardA.publishedAt).getTime()
     );
   };
 }

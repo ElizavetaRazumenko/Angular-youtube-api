@@ -1,11 +1,15 @@
 <main class="login_main">
-  <form class="login_form" [formGroup]="adminForm">
+  <form class="login_form" [formGroup]="adminForm" (ngSubmit)="submitForm()">
     <p class="title">Create new card</p>
     <label for="inputTitle" class="input_label">Title</label>
     <input
       #inputTitle
       type="text"
-      class="input"
+      class="{{
+        adminForm.controls.title.invalid && adminForm.controls.title.dirty
+          ? 'input_error'
+          : 'input'
+      }}"
       formControlName="title"
       required />
 
@@ -45,7 +49,12 @@
     <input
       #inputDescription
       type="text"
-      class="input"
+      class="{{
+        adminForm.controls.description.invalid &&
+        adminForm.controls.description.dirty
+          ? 'input_error'
+          : 'input'
+      }}"
       formControlName="description" />
 
     <div
@@ -66,7 +75,15 @@
     </div>
 
     <label for="inputImg" class="input_label">Img</label>
-    <input #inputImg type="text" class="input" formControlName="img" />
+    <input
+      #inputImg
+      type="text"
+      class="{{
+        adminForm.controls.img.invalid && adminForm.controls.img.dirty
+          ? 'input_error'
+          : 'input'
+      }}"
+      formControlName="img" />
 
     <div
       *ngIf="
@@ -84,7 +101,15 @@
       >
     </div>
     <label for="inputLink" class="input_label">Link video</label>
-    <input #inputLink type="text" class="input" formControlName="link" />
+    <input
+      #inputLink
+      type="text"
+      class="{{
+        adminForm.controls.link.invalid && adminForm.controls.link.dirty
+          ? 'input_error'
+          : 'input'
+      }}"
+      formControlName="link" />
 
     <div
       *ngIf="
@@ -105,11 +130,13 @@
     <label for="inputDate" class="input_label">Date</label>
     <input
       #inputDate
-      type="text"
-      class="input"
-      formControlName="date"
-      placeholder="dd.mm.year"
-      (input)="checkDate()" />
+      type="date"
+      class="{{
+        adminForm.controls.date.invalid && adminForm.controls.date.dirty
+          ? 'input_error'
+          : 'input'
+      }}"
+      formControlName="date" />
 
     <div
       *ngIf="
@@ -125,145 +152,60 @@
         class="error_message"
         >Please enter a creation date</span
       >
-    </div>
-    <span class="error_message">{{ dateErrorMessage }}</span>
-
-    <label for="inputTag1" class="input_label">Tags</label>
-    <div class="input-button-container">
-      <input
-        #inputTag1
-        type="text"
-        class="input-tag"
-        formControlName="tag1"
-        (input)="clearErroMessage()" />
-      <button class="add_button" (click)="addNewTag()">Add</button>
-    </div>
-    <div
-      *ngIf="
-        adminForm.controls.tag1.invalid &&
-        (adminForm.controls.tag1.dirty || adminForm.controls.tag1.touched)
-      "
-      class="error-container">
       <span
         *ngIf="
-          adminForm.controls.tag1.errors &&
-          adminForm.controls.tag1.errors['required']
+          adminForm.controls.date.errors &&
+          adminForm.controls.date.errors['dataNotValid'] &&
+          adminForm.controls.date.errors['dataNotValid'].value
         "
         class="error_message"
-        >Please enter a tag</span
+        >{{ adminForm.controls.date.errors['dataNotValid'].message }}</span
       >
     </div>
-
-    <ng-container *ngIf="isSecondTag">
-      <div class="input-button-container">
+    <div class="tags" formArrayName="tags">
+      <div *ngFor="let tag of tags.controls; let i = index" [formGroupName]="i">
+        <label class="input_label" [for]="'tag' + i">Tag {{ i + 1 }}</label>
         <input
-          #inputTag2
+          #inputTag
+          class="{{
+            tags.controls[i]?.get('tag')?.invalid &&
+            tags.controls[i]?.get('tag')?.dirty
+              ? 'input_error'
+              : 'input'
+          }}"
           type="text"
-          class="input-tag"
-          formControlName="tag2"
-          (input)="clearErroMessage()" />
-        <button class="add_button" (click)="addNewTag()">Add</button>
-      </div>
-      <div
-        *ngIf="
-          adminForm.controls.tag2.invalid &&
-          (adminForm.controls.tag2.dirty || adminForm.controls.tag2.touched)
-        "
-        class="error-container">
-        <span
+          [id]="'tag' + i"
+          formControlName="tag" />
+        <div
           *ngIf="
-            adminForm.controls.tag2.errors &&
-            adminForm.controls.tag2.errors['required']
+            tags.controls[i]?.get('tag')?.invalid &&
+            (tags.controls[i]?.get('tag')?.touched ||
+              tags.controls[i]?.get('tag')?.dirty)
           "
-          class="error_message"
-          >Please enter a tag</span
-        >
+          class="error-container">
+          <span
+            *ngIf="
+              tags.controls[i]?.get('tag')?.errors &&
+              tags.controls[i]?.get('tag')?.errors?.['required']
+            "
+            class="error_message"
+            >Please enter a tag
+          </span>
+        </div>
       </div>
-    </ng-container>
-
-    <ng-container *ngIf="isThirdTag">
-      <div class="input-button-container">
-        <input
-          #inputTag3
-          type="text"
-          class="input-tag"
-          formControlName="tag3"
-          (input)="clearErroMessage()" />
-        <button class="add_button" (click)="addNewTag()">Add</button>
+      <div class="button-tags_wrapper">
+        <button class="add_button" type="button" (click)="addNewTag()">
+          Add tag
+        </button>
+        <button class="button_reset" type="button" (click)="resetSettings()">
+          Reset
+        </button>
       </div>
-      <div
-        *ngIf="
-          adminForm.controls.tag3.invalid &&
-          (adminForm.controls.tag3.dirty || adminForm.controls.tag3.touched)
-        "
-        class="error-container">
-        <span
-          *ngIf="
-            adminForm.controls.tag3.errors &&
-            adminForm.controls.tag3.errors['required']
-          "
-          class="error_message"
-          >Please enter a tag</span
-        >
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="isFourthTag">
-      <div class="input-button-container">
-        <input
-          #inputTag4
-          type="text"
-          class="input-tag"
-          formControlName="tag4"
-          (input)="clearErroMessage()" />
-        <button class="add_button" (click)="addNewTag()">Add</button>
-      </div>
-      <div
-        *ngIf="
-          adminForm.controls.tag4.invalid &&
-          (adminForm.controls.tag4.dirty || adminForm.controls.tag4.touched)
-        "
-        class="error-container">
-        <span
-          *ngIf="
-            adminForm.controls.tag4.errors &&
-            adminForm.controls.tag4.errors['required']
-          "
-          class="error_message"
-          >Please enter a tag</span
-        >
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="isFifthTag">
-      <div class="input-button-container">
-        <input
-          #inputTag5
-          type="text"
-          class="input-tag"
-          formControlName="tag5"
-          (input)="clearErroMessage()" />
-        <button class="add_button" (click)="addNewTag()">Add</button>
-      </div>
-      <div
-        *ngIf="
-          adminForm.controls.tag5.invalid &&
-          (adminForm.controls.tag5.dirty || adminForm.controls.tag5.touched)
-        "
-        class="error-container">
-        <span
-          *ngIf="
-            adminForm.controls.tag5.errors &&
-            adminForm.controls.tag5.errors['required']
-          "
-          class="error_message"
-          >Please enter a tag</span
-        >
-      </div>
-    </ng-container>
-
-    <span class="error_message">{{ tagErrorMessage }}</span>
-    <button class="button_reset" (click)="resetSettings()">Reset</button>
-    <button class="button_create">Create card</button>
+    </div>
+    <button
+      class="{{ adminForm.invalid ? 'button_disabled' : 'button_create' }}"
+      [disabled]="adminForm.invalid">
+      Create card
+    </button>
   </form>
 </main>

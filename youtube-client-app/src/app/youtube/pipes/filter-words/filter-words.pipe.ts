@@ -1,15 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import Item from 'src/app/search-responce/search-item.model';
+import { MainCard } from 'src/app/redux/models/main.models';
 
 @Pipe({
   name: 'filterWords'
 })
 export class FilterWordsPipe implements PipeTransform {
-  sortingCards: Item[] = [];
-  public transform = (cards: Item[], value: string) => {
+  sortingCards: MainCard[] = [];
+  public transform = (cards: MainCard[], value: string) => {
     this.sortingCards = Array.from(cards);
     return this.sortingCards.filter((item) => {
-      const channelTitle = item.snippet.channelTitle.toLowerCase();
+      const channelTitle = item.channelTitle.toLowerCase();
       return channelTitle.includes(value.toLowerCase());
     });
   };

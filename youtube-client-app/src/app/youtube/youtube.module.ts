@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 
+import { AdminCardsComponent } from './components/admin-cards/admin-cards.component';
+import { FavoriteCardsComponent } from './components/favorite-cards/favorite-cards.component';
 import { SearchResultsItemComponent } from './components/search-results-item/search-results-item.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
 import { HighlightDirective } from './directives/border-color/highlight.directive';
@@ -12,6 +14,7 @@ import { ButtonColorDirective } from './directives/button-color/button-color.dir
 import { AdminComponent } from './pages/admin/admin.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { FavoriteComponent } from './pages/favorite/favorite.component';
 import { MainComponent } from './pages/main/main.component';
 import { FilterDataPipe } from './pipes/filter-data/filter-data.pipe';
 import { FilterViewsPipe } from './pipes/filter-views/filter-views.pipe';
@@ -26,6 +29,10 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent
+  },
+  {
+    path: 'favorite',
+    component: FavoriteComponent
   }
 ];
 @NgModule({
@@ -40,7 +47,10 @@ const routes: Routes = [
     DetailsComponent,
     StatisticComponent,
     ButtonColorDirective,
-    AdminComponent
+    AdminComponent,
+    FavoriteComponent,
+    AdminCardsComponent,
+    FavoriteCardsComponent
   ],
   imports: [
     ReactiveFormsModule,

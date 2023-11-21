@@ -7,9 +7,9 @@ import { MainPageService } from 'src/app/youtube/services/main-page/main-page.se
   styleUrls: ['./filtering-input.component.scss']
 })
 export class FilteringInputComponent {
-  constructor(private service: MainPageService) {}
+  constructor(private mainPageservice: MainPageService) {}
 
   getFilterInputValue = (value: string) => {
-    this.service.getFilterInputValue(value);
+    this.mainPageservice.getTheFilterInputValue(value);
   };
 }

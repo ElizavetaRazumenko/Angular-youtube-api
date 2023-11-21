@@ -7,13 +7,13 @@ import { MainPageService } from 'src/app/youtube/services/main-page/main-page.se
   styleUrls: ['./sorting-buttons.component.scss']
 })
 export class SortingButtonsComponent {
-  constructor(private service: MainPageService) {}
+  constructor(private mainpageService: MainPageService) {}
 
   turnOnSortingData = () => {
-    this.service.turnOnSortingData();
+    this.mainpageService.turnOnTheSortingData();
   };
 
   turnOnSortingViews = () => {
-    this.service.turnOnSortingViews();
+    this.mainpageService.turnOnTheSortingViews();
   };
 }

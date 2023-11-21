@@ -29,7 +29,8 @@
         margin-bottom: 2px;
     }
 
-    .input {
+    .input,
+    .input_error {
         min-width: 100%;
         box-sizing: border-box;
         padding: 0 10px;
@@ -39,12 +40,17 @@
         margin-bottom: 5px;
     }
 
+    .input_error {
+        border: 5px solid red; 
+    }
+
     .button_create,
-    .button_reset {
+    .button_reset,
+    .button_disabled {
         cursor: pointer;
         margin-right: 5px;
         border-radius: 5px;
-        margin-top: 45px;
+        margin-top: 15px;
         align-self: flex-end;
         border: none;
         color: $white-color;
@@ -62,6 +68,16 @@
         }
     }
 
+    .button_disabled {
+        cursor: not-allowed;
+        background-color: $grey-color;
+        box-shadow: 5px 0px 3px $grey-color;
+        &:hover {
+            background-color: $grey-color;
+            box-shadow: 5px 0px 3px $grey-color;
+        }
+    }
+
     .button_reset {
         background-color: $red;
         box-shadow: 5px 0px 3px $red;
@@ -71,6 +87,11 @@
         }
     }
 
+}
+
+.button-tags_wrapper {
+    display: flex;
+    justify-content: space-between;
 }
 
 .input-button-container {

@@ -2,32 +2,33 @@
   *ngIf="cardInfo"
   class="item"
   appHighlight
-  [publishAt]="cardInfo.snippet.publishedAt">
+  [publishAt]="cardInfo.publishedAt">
   <div class="thumbnails-wrapper">
-    <img
-      [src]="cardInfo.snippet.thumbnails.default.url"
-      alt="thumbnail"
-      class="thumbnail" />
+    <img [src]="cardInfo.defaultURL" alt="thumbnail" class="thumbnail" />
   </div>
   <div class="info-block">
     <div class="viewes">
       <div class="icon-viewes"></div>
-      <p class="count">{{ cardInfo.statistics.viewCount }}</p>
+      <p class="count">{{ cardInfo.viewCount }}</p>
     </div>
     <div class="likes">
       <div class="icon-likes"></div>
-      <p class="count">{{ cardInfo.statistics.likeCount }}</p>
+      <p class="count">{{ cardInfo.likeCount }}</p>
     </div>
     <div class="dislikes">
       <div class="icon-dislikes"></div>
-      <p class="count">{{ cardInfo.statistics.favoriteCount }}</p>
+      <p class="count">{{ cardInfo.favoriteCount }}</p>
     </div>
     <div class="comments">
       <div class="icon-comments"></div>
-      <p class="count">{{ cardInfo.statistics.commentCount }}</p>
+      <p class="count">{{ cardInfo.commentCount }}</p>
     </div>
   </div>
-  <p class="video-title">{{ cardInfo.snippet.title }}</p>
+  <p class="video-title">{{ cardInfo.title }}</p>
+  <button class="add-to-fav_btn" (click)="addToFavorites()">
+    <div class="icon-fav"></div>
+    {{ isCardOnFavorites ? 'Remove from favorites' : 'Add to favorites' }}
+  </button>
   <app-custom-button [className]="'item-button button'" (click)="setVideoData()"
     >more...</app-custom-button
   >

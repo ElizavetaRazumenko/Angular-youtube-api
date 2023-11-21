@@ -1,10 +1,13 @@
 <div class="header">
   <div class="header-main">
     <ng-container *ngIf="buttonLogTextContent$ | async as buttonLogTextContent">
-      <button class="login_button" (click)="loginAutorization()">
+      <button class="button_login" (click)="loginAutorization()">
         {{ buttonLogTextContent }}
       </button>
     </ng-container>
+    <button class="button_admin" (click)="routingAdminPage()">
+      To Admin Page
+    </button>
     <div class="search-block">
       <app-logo></app-logo>
       <app-search-form></app-search-form>
@@ -12,6 +15,9 @@
         (click)="changeFilterVisability()"></app-settings-button>
     </div>
     <app-user-data class="user"></app-user-data>
+    <button class="favorite_btn" (click)="routingFavoritePage()">
+      <div class="favorite"></div>
+    </button>
   </div>
   <ng-container *ngIf="isFilterVisible">
     <app-filtering-block></app-filtering-block>

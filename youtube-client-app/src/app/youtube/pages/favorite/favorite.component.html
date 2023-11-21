@@ -1,0 +1,5 @@
+<div class="favorite" *ngIf="cards$ | async as cards">
+  <ng-container *ngFor="let card of cards">
+    <app-favorite-cards [itemCard]="card"></app-favorite-cards>
+  </ng-container>
+</div>

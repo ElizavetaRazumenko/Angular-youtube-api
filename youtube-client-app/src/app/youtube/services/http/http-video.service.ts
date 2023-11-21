@@ -18,12 +18,13 @@ export class HttpVideoService {
   private searchVideosURL = 'videos?';
   constructor(private http: HttpClient) {}
 
-  public getVideos(query: string, maxResults = 15) {
+  public getVideos(query: string, maxResults = 20) {
     const params: HttpParams = new HttpParams()
       .set('type', 'video')
       .set('part', 'snippet')
       .set('maxResults', maxResults)
       .set('q', query);
+      
     return this.http
       .get<SearchVideoResponse>(`${this.searchURL}`, { params })
       .pipe(

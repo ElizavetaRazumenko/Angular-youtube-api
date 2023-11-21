@@ -8,22 +8,47 @@
         display: grid;
         height: 80px;
         grid-template-columns: 1fr 2fr 1fr;
-        grid-template-areas: "login search user";
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: "login search user"
+        "admin search favorite";
         align-items: center;
         
-        .login_button {
+      
+        .button_login, 
+        .button_admin {
             cursor: pointer;
             justify-self: flex-end;
-            max-width: 60px;
-            grid-area: login;
-            color: $black;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            height: 25px;
+            width: 90px;
+            border-radius: 5px;
+            align-self: flex-end;
             border: none;
-            background-color: $background-color;
-            font-size: .75rem;
+            color: $white-color;
+            background-color: $blue-color;
+            box-shadow: 5px 0px 3px $blue-color;
             transition: .5s;
+            font-size: .75rem;
+            font-weight: 400;
+    
+            &:hover {
+                background-color: $blue-color-hover;
+                box-shadow: 5px 0px 3px $blue-color-hover;
+            }
+        }
 
+        .button_admin {
+            grid-area: admin; 
+            color: $black;
+            width: 110px;
+            margin-right: 0;
+            background-color: $background-color;
+            box-shadow: none;
             &:hover {
                 color: $font-grey;
+                background-color: $background-color;
+                box-shadow: none;
             }
         }
 
@@ -38,6 +63,21 @@
 
         .user {
             grid-area: user; 
+        }
+
+        .favorite {
+            cursor: pointer;
+            grid-area: favorite;
+            margin-left: 25px;
+            width: 25px;
+            height: 25px;
+            background-image: url('../../../../assets/fav.png');
+            background-repeat: no-repeat;
+            background-size: contain; 
+        }
+        .favorite_btn {
+            border: none;
+            background-color: $background-color;
         }
     }
 }

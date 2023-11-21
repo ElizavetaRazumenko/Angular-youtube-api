@@ -7,6 +7,13 @@ import {
   SimpleChanges
 } from '@angular/core';
 
+import {
+  DAYS_PER_WEEK,
+  MAX_DAYS_BORDER,
+  MIN_DAYS_BORDER,
+  SECONDS_PER_DAY
+} from '../../constants/constants';
+
 @Directive({
   selector: '[appHighlight]'
 })
@@ -29,13 +36,13 @@ export class HighlightDirective implements OnChanges {
   private setBorderColor(): void {
     const previousDate = new Date(this.publishAt);
     const daysDifference = Math.ceil(
-      Math.abs(Date.now() - previousDate.getTime()) / (1000 * 3600 * 24)
+      Math.abs(Date.now() - previousDate.getTime()) / SECONDS_PER_DAY
     );
-    if (daysDifference < 7) {
+    if (daysDifference < DAYS_PER_WEEK) {
       this.render2.setStyle(this.elRef.nativeElement, 'border-color', 'blue');
-    } else if (daysDifference < 30) {
+    } else if (daysDifference < MIN_DAYS_BORDER) {
       this.render2.setStyle(this.elRef.nativeElement, 'border-color', 'green');
-    } else if (daysDifference < 180) {
+    } else if (daysDifference < MAX_DAYS_BORDER) {
       this.render2.setStyle(this.elRef.nativeElement, 'border-color', 'yellow');
     } else {
       this.render2.setStyle(this.elRef.nativeElement, 'border-color', 'red');

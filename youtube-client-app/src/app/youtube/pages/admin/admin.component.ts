@@ -1,11 +1,22 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable @ngrx/use-consistent-global-store-name */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { adminAddCardAction } from 'src/app/redux/actions/admin.actions';
+import { AdminCard } from 'src/app/redux/models/admin.models';
+import { selectAdminCard } from 'src/app/redux/selectors/admin.selectors';
+
+import { dataNotValid } from '../../validators/data.validator';
 
 @Component({
   selector: 'app-admin',
@@ -13,26 +24,21 @@ import {
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  public isSecondTag = false;
-  public isThirdTag = false;
-  public isFourthTag = false;
-  public isFifthTag = false;
-  public tagErrorMessage = '';
-  public tagsArray: string[] = [''];
-  public dateErrorMessage = '';
+  card$: Observable<AdminCard[]> = this.store.select(selectAdminCard);
+
   public adminForm!: FormGroup<{
     title: FormControl<string | null>;
     description: FormControl<string | null>;
     img: FormControl<string | null>;
     link: FormControl<string | null>;
-    date: FormControl<string | null>;
-    tag1: FormControl<string | null>;
-    tag2: FormControl<string | null>;
-    tag3: FormControl<string | null>;
-    tag4: FormControl<string | null>;
-    tag5: FormControl<string | null>;
+    date: FormControl;
+    tags: FormArray;
   }>;
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private readonly store: Store
+  ) {}
 
   ngOnInit() {
     this.adminForm = this.fb.group({
@@ -43,66 +49,50 @@ export class AdminComponent implements OnInit {
       description: ['', [Validators.maxLength(255)]],
       img: ['', [Validators.required]],
       link: ['', [Validators.required]],
-      date: ['', [Validators.required]],
-      tag1: ['', [Validators.required]],
-      tag2: this.isSecondTag ? ['', [Validators.required]] : [''],
-      tag3: this.isThirdTag ? ['', [Validators.required]] : [''],
-      tag4: this.isFourthTag ? ['', [Validators.required]] : [''],
-      tag5: this.isFifthTag ? ['', [Validators.required]] : ['']
+      date: ['', [Validators.required, dataNotValid]],
+      tags: this.fb.array([this.createTagArrayForm()])
     });
   }
 
-  public checkDate() {
-    this.dateErrorMessage = '';
-    const date = this.adminForm.value.date!;
-    const dateArray = date?.split('.');
-    if (date) {
-      if (!/\d./.test(date)) {
-        this.dateErrorMessage = 'Date must not contain letters';
-      } else if (dateArray.length !== 3) {
-        this.dateErrorMessage = 'Enter the date in the specified format';
-      } else if (!(new Date(dateArray.reverse().join('-')) < new Date())) {
-        this.dateErrorMessage = 'The date is invalid';
-      }
-    }
+  get tags() {
+    return this.adminForm.get('tags') as FormArray;
   }
 
-  public clearErroMessage() {
-    this.tagErrorMessage = '';
-  }
-
-  public addNewTag() {
-    if (this.tagsArray.length > 4) {
-      this.tagErrorMessage = 'You cannot create more than five tags';
-    } else if (!this.isSecondTag) {
-      this.isSecondTag = true;
-      this.tagsArray.push('');
-    } else if (!this.isThirdTag) {
-      this.isThirdTag = true;
-      this.tagsArray.push('');
-    } else if (!this.isFourthTag) {
-      this.isFourthTag = true;
-      this.tagsArray.push('');
-    } else if (!this.isFifthTag) {
-      this.isFifthTag = true;
-      this.tagsArray.push('');
+  addNewTag() {
+    if (this.tags.length < 5 && this.tags.status === 'VALID') {
+      this.tags.push(this.createTagArrayForm());
     }
+  }
+  public createTagArrayForm(): FormGroup {
+    return this.fb.group({
+      tag: ['', Validators.required]
+    });
   }
 
   public resetSettings() {
-    this.isSecondTag = false;
-    this.isThirdTag = false;
-    this.isFourthTag = false;
-    this.isFifthTag = false;
-    this.tagErrorMessage = '';
-    this.adminForm.controls.title.setValue('');
-    this.adminForm.controls.description.setValue('');
-    this.adminForm.controls.img.setValue('');
-    this.adminForm.controls.date.setValue('');
-    this.adminForm.controls.tag1.setValue('');
-    this.adminForm.controls.tag2.setValue('');
-    this.adminForm.controls.tag3.setValue('');
-    this.adminForm.controls.tag4.setValue('');
-    this.adminForm.controls.tag5.setValue('');
+    this.adminForm.reset();
+    this.adminForm.setControl(
+      'tags',
+      this.fb.array([this.createTagArrayForm()])
+    );
+  }
+  public submitForm() {
+    if (!this.adminForm.invalid) {
+      this.store.dispatch(
+        adminAddCardAction({
+          title: this.adminForm.value.title || '',
+          description: this.adminForm.value.description || '',
+          img: this.adminForm.value.img || '',
+          link: this.adminForm.value.link || '',
+          date: this.adminForm.value.date || '',
+          tags: this.formatTagsToArray(this.adminForm.value.tags)
+        })
+      );
+    }
+    this.router.navigate(['']);
+  }
+
+  private formatTagsToArray(tags: { tag: string }[]) {
+    return tags.map((item) => item.tag);
   }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/auth/services/login.service';
-import { HttpVideoService } from 'src/app/youtube/services/http/http-video.service';
 import Item from 'src/app/search-responce/search-item.model';
+import { HttpVideoService } from 'src/app/youtube/services/http/http-video.service';
 
 @Component({
   selector: 'app-details',

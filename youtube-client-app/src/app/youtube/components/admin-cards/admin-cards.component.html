@@ -1,0 +1,14 @@
+<div class="item" appHighlight [publishAt]="cardInfo.date">
+  <p class="video-title">{{ cardInfo.title }}</p>
+  <p class="video-description">{{ cardInfo.description }}</p>
+  <p class="link">Img link: {{ cardInfo.img }}</p>
+  <p class="link">Video link: {{ cardInfo.link }}</p>
+  <p class="link">Creation date: {{ date | date: 'fullDate' }}</p>
+  <button class="remove_card_btn" (click)="deleteCard(cardInfo.id)">
+    <div class="icon-urn"></div>
+    Remove card
+  </button>
+  <app-custom-button [className]="'item-button button'"
+    >more...</app-custom-button
+  >
+</div>

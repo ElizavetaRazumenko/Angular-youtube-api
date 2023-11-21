@@ -28,7 +28,8 @@
         margin-bottom: 2px;
     }
 
-    .input {
+    .input,
+    .input_error {
         box-sizing: border-box;
         padding: 0 10px;
         border: none;
@@ -38,7 +39,12 @@
         margin-bottom: 5px;
     }
 
-    .button_login {
+    .input_error {
+        border: 5px solid red;
+    }
+
+    .button_login,
+    .button_disabled {
         cursor: pointer;
         margin-right: 10px;
         border-radius: 5px;
@@ -57,6 +63,16 @@
         &:hover {
             background-color: $blue-color-hover;
             box-shadow: 5px 0px 3px $blue-color-hover;
+        }
+    }
+
+    .button_disabled {
+        cursor: not-allowed;
+        background-color: $grey-color;
+        box-shadow: 5px 0px 3px $grey-color;
+        &:hover {
+            background-color: $grey-color;
+            box-shadow: 5px 0px 3px $grey-color;
         }
     }
 
