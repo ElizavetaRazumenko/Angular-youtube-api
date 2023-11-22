@@ -1,3 +1,10 @@
+@import '../../../global.scss';
+
+.logo_button {
+    border: none;
+    background-color: $background-color;
+}
+
 .logo {
     cursor: pointer;
     width: 50px;

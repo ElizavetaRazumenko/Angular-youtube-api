@@ -27,6 +27,7 @@ export class SearchFormComponent {
   ) {}
 
   public changeInputValue(query: string) {
+    localStorage.setItem('Query', query);
     this.store.dispatch(
       mainSearchAction({ query, queryLength: MIN_INPUT_VALUE_LENGTH })
     );
@@ -34,6 +35,7 @@ export class SearchFormComponent {
   }
 
   public sendFormInfo(query: string) {
+    localStorage.setItem('Query', query);
     this.store.dispatch(
       mainSearchAction({ query, queryLength: MIN_SUBMIT_FORM_VALUE_LENGTH })
     );

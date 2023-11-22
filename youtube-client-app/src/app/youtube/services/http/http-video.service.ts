@@ -4,7 +4,9 @@ import {
   HttpParams
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, switchMap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { map, Observable, switchMap, tap } from 'rxjs';
+import { paginationAddInfoAction } from 'src/app/redux/actions/pagination.actions';
 import Item from 'src/app/search-responce/search-item.model';
 import VideoItems, {
   SearchVideoResponse
@@ -16,7 +18,10 @@ import VideoItems, {
 export class HttpVideoService {
   private searchURL = 'search?';
   private searchVideosURL = 'videos?';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient, 
+    private readonly store: Store
+  ) {}
 
   public getVideos(query: string, maxResults = 20) {
     const params: HttpParams = new HttpParams()
@@ -28,6 +33,7 @@ export class HttpVideoService {
     return this.http
       .get<SearchVideoResponse>(`${this.searchURL}`, { params })
       .pipe(
+        tap((searchResponse) => this.savePagesToken(searchResponse)),
         map((videoResponse: SearchVideoResponse) => {
           const videoItemsIds: string = videoResponse.items
             .map((items) => items.id.videoId)
@@ -42,7 +48,33 @@ export class HttpVideoService {
       );
   }
 
-  getItemById(id: string): Observable<Item[]> {
+  public getVideosOnPage(query: string, tokenName: string, token: string, maxResults = 20) {
+    const params: HttpParams = new HttpParams()
+      .set('type', 'video')
+      .set('part', 'snippet')
+      .set('maxResults', maxResults)
+      .set('q', query)
+      .set(`${tokenName}`, token);
+      
+    return this.http
+      .get<SearchVideoResponse>(`${this.searchURL}`, { params })
+      .pipe(
+        tap((searchResponse) => this.savePagesToken(searchResponse)),
+        map((videoResponse: SearchVideoResponse) => {
+          const videoItemsIds: string = videoResponse.items
+            .map((items) => items.id.videoId)
+            .join(',');
+          return videoItemsIds;
+        }),
+        switchMap((videoItemsIds) => {
+          return this.http.get<VideoItems>(
+            `${this.searchVideosURL}&id=${videoItemsIds}&part=snippet,statistics`
+          );
+        })
+      );
+  }
+
+  public getItemById(id: string): Observable<Item[]> {
     const params = new HttpParams()
       .set('part', 'snippet,statistics')
       .set('id', id);
@@ -50,5 +82,15 @@ export class HttpVideoService {
       .pipe(
         map((response) => response.items),
       );
+  }
+
+  private savePagesToken(searchResponse: SearchVideoResponse) {
+    const { nextPageToken, prevPageToken } = searchResponse;
+    this.store.dispatch(paginationAddInfoAction({
+      info: {
+        nextPageToken: nextPageToken || '',
+        prevPageToken: prevPageToken || ''
+      }
+    }))
   }
 }

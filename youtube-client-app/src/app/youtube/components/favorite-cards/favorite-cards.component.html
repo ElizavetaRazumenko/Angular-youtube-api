@@ -25,9 +25,9 @@
     </div>
   </div>
   <p class="video-title">{{ itemCard.title }}</p>
-  <button class="add-to-fav_btn">
+  <button class="add-to-fav_btn" (click)="removeFromFavorites()">
     <div class="icon-fav"></div>
-    Add to favorites
+    Remove from favorites
   </button>
   <app-custom-button [className]="'item-button button'"
     >more...</app-custom-button

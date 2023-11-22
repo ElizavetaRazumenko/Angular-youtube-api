@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { adminRemoveCardAction } from 'src/app/redux/actions/admin.actions';
+import { favoriteRemoveCardAction } from 'src/app/redux/actions/favorite.actions';
 import { FavoriteCard } from 'src/app/redux/models/favorite.models';
 
 @Component({
@@ -14,10 +14,10 @@ export class FavoriteCardsComponent {
 
   constructor(private readonly store: Store) {}
 
-  public deleteCard(id: string) {
+  public removeFromFavorites() {
     this.store.dispatch(
-      adminRemoveCardAction({
-        id
+      favoriteRemoveCardAction({
+        id: this.itemCard.id
       })
     );
   }

@@ -6,7 +6,8 @@ export enum MainActionsType {
   AddCard = '[main] addCard',
   AddCardArr = '[main] addCardArr',
   ClearCards = '[main] clearCards',
-  SearchQuery = '[main] search query'
+  SearchQuery = '[main] search query',
+  SearchOnPageQuery = '[main] search on page query'
 }
 
 export const mainAddCardAction = createAction(
@@ -19,6 +20,15 @@ export const mainClearCardsAction = createAction(MainActionsType.ClearCards);
 export const mainSearchAction = createAction(
   MainActionsType.SearchQuery,
   props<{ query: string; queryLength: number }>()
+);
+
+export const mainSearchOnPageAction = createAction(
+  MainActionsType.SearchOnPageQuery,
+  props<{
+    query: string;
+    tokenName: string;
+    token: string;
+  }>()
 );
 
 export const mainAddCardArrAction = createAction(

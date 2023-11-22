@@ -25,7 +25,7 @@
     </div>
   </div>
   <p class="video-title">{{ cardInfo.title }}</p>
-  <button class="add-to-fav_btn" (click)="addToFavorites()">
+  <button class="add-to-fav_btn" (click)="toggleInFavorites()">
     <div class="icon-fav"></div>
     {{ isCardOnFavorites ? 'Remove from favorites' : 'Add to favorites' }}
   </button>

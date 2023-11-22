@@ -13,6 +13,7 @@ import { HighlightDirective } from './directives/border-color/highlight.directiv
 import { ButtonColorDirective } from './directives/button-color/button-color.directive';
 import { AdminComponent } from './pages/admin/admin.component';
 import { DetailsComponent } from './pages/details/details.component';
+import { DetailsCastomComponent } from './pages/details-castom/details-castom.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { FavoriteComponent } from './pages/favorite/favorite.component';
 import { MainComponent } from './pages/main/main.component';
@@ -22,6 +23,10 @@ import { FilterWordsPipe } from './pipes/filter-words/filter-words.pipe';
 
 const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
+  {
+    path: 'details/user-card/:id',
+    component: DetailsCastomComponent
+  },
   {
     path: 'details/:id',
     component: DetailsComponent
@@ -50,7 +55,8 @@ const routes: Routes = [
     AdminComponent,
     FavoriteComponent,
     AdminCardsComponent,
-    FavoriteCardsComponent
+    FavoriteCardsComponent,
+    DetailsCastomComponent
   ],
   imports: [
     ReactiveFormsModule,

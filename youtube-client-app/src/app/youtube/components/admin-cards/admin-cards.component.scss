@@ -86,3 +86,13 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+.link {
+    text-decoration: none;
+    color: $black;
+    transition: .5s;
+
+    &:hover {
+        color: $font-grey;
+    }
+}

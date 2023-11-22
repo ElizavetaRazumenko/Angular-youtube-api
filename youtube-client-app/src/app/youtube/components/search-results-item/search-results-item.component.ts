@@ -2,7 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { favoriteAddCardAction } from 'src/app/redux/actions/favorite.actions';
+import {
+  favoriteAddCardAction,
+  favoriteRemoveCardAction
+} from 'src/app/redux/actions/favorite.actions';
 import { FavoriteCard } from 'src/app/redux/models/favorite.models';
 import { MainCard } from 'src/app/redux/models/main.models';
 import { selectFavoriteCard } from 'src/app/redux/selectors/favorite.selectors';
@@ -18,13 +21,15 @@ export class SearchResultsItemComponent implements OnInit {
   cards$: Observable<FavoriteCard[]> = this.store.select(selectFavoriteCard);
   public isCardOnFavorites = false;
   @Input() public cardInfo!: MainCard;
-  id!: string;
-  link!: string;
+  public id!: string;
+  public link!: string;
+
   constructor(
     public detailsService: DetailsService,
     private router: Router,
     private readonly store: Store
   ) {}
+
   ngOnInit() {
     this.id = this.cardInfo.id;
     this.link = `/details/${this.id}`;
@@ -35,12 +40,20 @@ export class SearchResultsItemComponent implements OnInit {
     });
   }
 
-  public addToFavorites() {
-    this.store.dispatch(
-      favoriteAddCardAction({
-        card: this.cardInfo
-      })
-    );
+  public toggleInFavorites() {
+    if (this.isCardOnFavorites) {
+      this.store.dispatch(
+        favoriteRemoveCardAction({
+          id: this.cardInfo.id
+        })
+      );
+    } else {
+      this.store.dispatch(
+        favoriteAddCardAction({
+          card: this.cardInfo
+        })
+      );
+    }
   }
 
   public setVideoData() {

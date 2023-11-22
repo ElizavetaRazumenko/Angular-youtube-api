@@ -29,6 +29,24 @@ export class MainEffects {
     );
   });
 
+  getVideoCardsOnPage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MainActions.mainSearchOnPageAction),
+      switchMap((action) =>
+        this.httpVideoService.getVideosOnPage(
+          action.query,
+          action.tokenName,
+          action.token
+        )
+      ),
+      map((videoItems) =>
+        MainActions.mainAddCardArrAction({
+          cards: this.convertVideoItemsToCards(videoItems)
+        })
+      )
+    );
+  });
+
   private convertVideoItemsToCards(videoItems: VideoItems): MainCard[] {
     return videoItems.items.map((card) => ({
       id: card.id,
