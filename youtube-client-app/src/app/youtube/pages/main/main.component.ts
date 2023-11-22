@@ -90,17 +90,35 @@ export class MainComponent implements OnInit {
   }
 
   public increasePage() {
+    if (this.nextToken !== '') {
+      const query = localStorage.getItem('Query') || '';
+      this.store.dispatch(
+        paginationChangePageAction({ page: this.currentPage + 1 })
+      );
+      this.store.dispatch(mainClearCardsAction());
+      this.store.dispatch(
+        mainSearchOnPageAction({
+          query,
+
+          token: this.nextToken
+        })
+      );
+    }
+  }
+
+  public decreasePage() {
     const query = localStorage.getItem('Query') || '';
-    this.store.dispatch(
-      paginationChangePageAction({ page: this.currentPage + 1 })
-    );
-    this.store.dispatch(mainClearCardsAction());
-    this.store.dispatch(
-      mainSearchOnPageAction({
-        query,
-        tokenName: 'nextPageToken',
-        token: this.nextToken
-      })
-    );
+    if (this.currentPage > 1) {
+      this.store.dispatch(
+        paginationChangePageAction({ page: this.currentPage - 1 })
+      );
+      this.store.dispatch(mainClearCardsAction());
+      this.store.dispatch(
+        mainSearchOnPageAction({
+          query,
+          token: this.prevToken
+        })
+      );
+    }
   }
 }

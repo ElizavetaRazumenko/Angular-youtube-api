@@ -48,13 +48,13 @@ export class HttpVideoService {
       );
   }
 
-  public getVideosOnPage(query: string, tokenName: string, token: string, maxResults = 20) {
+  public getVideosOnPage(query: string, token: string, maxResults = 20) {
     const params: HttpParams = new HttpParams()
       .set('type', 'video')
       .set('part', 'snippet')
       .set('maxResults', maxResults)
       .set('q', query)
-      .set(`${tokenName}`, token);
+      .set('pageToken', token);
       
     return this.http
       .get<SearchVideoResponse>(`${this.searchURL}`, { params })

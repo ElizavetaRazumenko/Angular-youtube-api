@@ -33,11 +33,7 @@ export class MainEffects {
     return this.actions$.pipe(
       ofType(MainActions.mainSearchOnPageAction),
       switchMap((action) =>
-        this.httpVideoService.getVideosOnPage(
-          action.query,
-          action.tokenName,
-          action.token
-        )
+        this.httpVideoService.getVideosOnPage(action.query, action.token)
       ),
       map((videoItems) =>
         MainActions.mainAddCardArrAction({

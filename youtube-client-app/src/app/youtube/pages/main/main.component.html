@@ -25,11 +25,15 @@
 <ng-container *ngIf="videos$ | async as videos">
   <ng-container *ngIf="videos.length">
     <div class="pagination_container">
-      <button [class]="currentPage === 1 ? 'hidden' : 'arrow_left_btn'">
+      <button
+        [class]="currentPage === 1 ? 'hidden' : 'arrow_left_btn'"
+        (click)="decreasePage()">
         <div class="icon_arrow_left"></div>
       </button>
       <p class="page">{{ currentPage }}</p>
-      <button class="arrow_right_btn" (click)="increasePage()">
+      <button
+        [class]="nextToken === '' ? 'hidden' : 'arrow_right_btn'"
+        (click)="increasePage()">
         <div class="icon_right_left"></div>
       </button>
     </div>

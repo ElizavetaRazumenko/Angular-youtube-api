@@ -26,7 +26,6 @@ export const mainSearchOnPageAction = createAction(
   MainActionsType.SearchOnPageQuery,
   props<{
     query: string;
-    tokenName: string;
     token: string;
   }>()
 );
