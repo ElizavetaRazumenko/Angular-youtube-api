@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/quotes */
 import { FormControl } from '@angular/forms';
 
 import { MAX_PASS_LENGTH } from '../constants/constants';
@@ -10,7 +9,7 @@ export function passwordNotStrength(control: FormControl) {
         passwordNotStrength: {
           value: true,
           message:
-            "Your password isn't strong enough: must be at least 8 characters long"
+            'Password is not strong enough: must be at least 8 characters long'
         }
       };
     }
@@ -19,7 +18,7 @@ export function passwordNotStrength(control: FormControl) {
         passwordNotStrength: {
           value: true,
           message:
-            "Your password isn't strong enough: must contain at least one capital letter"
+            'Password is not strong enough: must contain at least one capital letter'
         }
       };
     }
@@ -28,7 +27,7 @@ export function passwordNotStrength(control: FormControl) {
         passwordNotStrength: {
           value: true,
           message:
-            "Your password isn't strong enough: must contain at least one capital letter"
+            'Password is not strong enough: must contain at least one capital letter'
         }
       };
     }
@@ -37,7 +36,7 @@ export function passwordNotStrength(control: FormControl) {
         passwordNotStrength: {
           value: true,
           message:
-            "Your password isn't strong enough: must contain at least one number"
+            'Password is not strong enough: must contain at least one number'
         }
       };
     }
@@ -46,7 +45,7 @@ export function passwordNotStrength(control: FormControl) {
         passwordNotStrength: {
           value: true,
           message:
-            "Your password isn't strong enough: must contain at least one special character"
+            'Password is not strong enough: must contain at least one special character'
         }
       };
     }

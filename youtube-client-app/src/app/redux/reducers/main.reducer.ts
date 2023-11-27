@@ -1,4 +1,3 @@
-/* eslint-disable @ngrx/on-function-explicit-return-type */
 import { createReducer, on } from '@ngrx/store';
 
 import * as MainActions from '../actions/main.actions';
@@ -11,16 +10,25 @@ export const initialState: MainState = {
 
 export const mainReducer = createReducer(
   initialState,
-  on(MainActions.mainAddCardAction, (state: MainState, { card }) => ({
-    ...state,
-    main: [...state.main, card]
-  })),
-  on(MainActions.mainAddCardArrAction, (state: MainState, { cards }) => ({
-    ...state,
-    main: [...state.main, ...cards]
-  })),
-  on(MainActions.mainClearCardsAction, (state: MainState) => ({
-    ...state,
-    main: []
-  }))
+  on(
+    MainActions.mainAddCardAction,
+    (state: MainState, { card }): MainState => ({
+      ...state,
+      main: [...state.main, card]
+    })
+  ),
+  on(
+    MainActions.mainAddCardArrAction,
+    (state: MainState, { cards }): MainState => ({
+      ...state,
+      main: [...state.main, ...cards]
+    })
+  ),
+  on(
+    MainActions.mainClearCardsAction,
+    (state: MainState): MainState => ({
+      ...state,
+      main: []
+    })
+  )
 );

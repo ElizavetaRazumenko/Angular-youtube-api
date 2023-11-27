@@ -9,11 +9,11 @@ import { MainPageService } from 'src/app/youtube/services/main-page/main-page.se
 export class SortingButtonsComponent {
   constructor(private mainpageService: MainPageService) {}
 
-  turnOnSortingData = () => {
+  public turnOnSortingData = () => {
     this.mainpageService.turnOnTheSortingData();
   };
 
-  turnOnSortingViews = () => {
+  public turnOnSortingViews = () => {
     this.mainpageService.turnOnTheSortingViews();
   };
 }

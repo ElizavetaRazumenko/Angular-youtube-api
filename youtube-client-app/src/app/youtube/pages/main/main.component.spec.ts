@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { MainComponent } from './main.component';
 
@@ -8,6 +9,7 @@ describe('MainComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      providers: [provideMockStore({})],
       declarations: [MainComponent]
     });
     fixture = TestBed.createComponent(MainComponent);

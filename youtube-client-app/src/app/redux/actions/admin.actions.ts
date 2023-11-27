@@ -1,4 +1,3 @@
-/* eslint-disable @ngrx/prefer-inline-action-props */
 import { createAction, props } from '@ngrx/store';
 
 import { AdminCardAddProps } from '../models/admin.models';
@@ -10,7 +9,7 @@ export enum AdminActionsType {
 
 export const adminAddCardAction = createAction(
   AdminActionsType.Card,
-  props<AdminCardAddProps>()
+  props<{ card: AdminCardAddProps }>()
 );
 
 export const adminRemoveCardAction = createAction(

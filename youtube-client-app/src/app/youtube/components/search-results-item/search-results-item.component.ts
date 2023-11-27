@@ -18,9 +18,11 @@ import { DetailsService } from '../../services/details-page/details.service';
   styleUrls: ['./search-results-item.component.scss']
 })
 export class SearchResultsItemComponent implements OnInit {
-  cards$: Observable<FavoriteCard[]> = this.store.select(selectFavoriteCard);
-  public isCardOnFavorites = false;
   @Input() public cardInfo!: MainCard;
+
+  private cards$: Observable<FavoriteCard[]> =
+    this.store.select(selectFavoriteCard);
+  public isCardOnFavorites = false;
   public id!: string;
   public link!: string;
 

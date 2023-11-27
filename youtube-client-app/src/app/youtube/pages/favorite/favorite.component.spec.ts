@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { FavoriteComponent } from './favorite.component';
 
@@ -8,6 +9,7 @@ describe('FavoriteComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      providers: [provideMockStore({})],
       declarations: [FavoriteComponent]
     });
     fixture = TestBed.createComponent(FavoriteComponent);

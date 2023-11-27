@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+import { FAKE_AUTH_TOKEN } from '../constants/constants';
+
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private isAuthUser: BehaviorSubject<boolean> = new BehaviorSubject(
+  public isAuthUser: BehaviorSubject<boolean> = new BehaviorSubject(
     !!localStorage.getItem('authToken')
   );
 
-  private buttonLogTextContent: BehaviorSubject<string> = new BehaviorSubject(
+  public buttonLogTextContent: BehaviorSubject<string> = new BehaviorSubject(
     localStorage.getItem('authToken') ? 'Logout' : 'Login'
   );
 
@@ -18,7 +20,7 @@ export class LoginService {
     this.buttonLogTextContent.asObservable();
 
   public UserIsAuth(): void {
-    localStorage.setItem('authToken', '123456');
+    localStorage.setItem('authToken', FAKE_AUTH_TOKEN);
     this.isAuthUser.next(true);
     this.buttonLogTextContent.next('Logout');
   }

@@ -14,12 +14,14 @@ export class DetailsComponent implements OnInit {
   public isAuntUser!: boolean;
   public currentId = '';
   public currentItem!: Item;
+
   constructor(
     private httpVideoServise: HttpVideoService,
     private route: ActivatedRoute,
     private loginService: LoginService,
     public router: Router
   ) {}
+
   ngOnInit() {
     this.isAuntUser$.subscribe((value) => {
       this.isAuntUser = value;

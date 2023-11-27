@@ -1,4 +1,3 @@
-/* eslint-disable @ngrx/on-function-explicit-return-type */
 import { createReducer, on } from '@ngrx/store';
 
 import * as PaginationActions from '../actions/pagination.actions';
@@ -17,7 +16,7 @@ export const paginationReducer = createReducer(
   initialState,
   on(
     PaginationActions.paginationAddInfoAction,
-    (state: PaginationState, { info }) => ({
+    (state: PaginationState, { info }): PaginationState => ({
       ...state,
       pagination: {
         ...state.pagination,
@@ -28,7 +27,7 @@ export const paginationReducer = createReducer(
 
   on(
     PaginationActions.paginationChangePageAction,
-    (state: PaginationState, { page }) => ({
+    (state: PaginationState, { page }): PaginationState => ({
       ...state,
       pagination: {
         ...state.pagination,

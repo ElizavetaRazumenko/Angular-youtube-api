@@ -1,8 +1,4 @@
-/* eslint-disable prettier/prettier */
-import {
-  HttpClient,
-  HttpParams
-} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
@@ -16,10 +12,11 @@ import VideoItems, {
   providedIn: 'root'
 })
 export class HttpVideoService {
-  private searchURL = 'search?';
-  private searchVideosURL = 'videos?';
+  public searchURL = 'search?';
+  public searchVideosURL = 'videos?';
+
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private readonly store: Store
   ) {}
 
@@ -29,7 +26,7 @@ export class HttpVideoService {
       .set('part', 'snippet')
       .set('maxResults', maxResults)
       .set('q', query);
-      
+
     return this.http
       .get<SearchVideoResponse>(`${this.searchURL}`, { params })
       .pipe(
@@ -55,7 +52,7 @@ export class HttpVideoService {
       .set('maxResults', maxResults)
       .set('q', query)
       .set('pageToken', token);
-      
+
     return this.http
       .get<SearchVideoResponse>(`${this.searchURL}`, { params })
       .pipe(
@@ -78,19 +75,20 @@ export class HttpVideoService {
     const params = new HttpParams()
       .set('part', 'snippet,statistics')
       .set('id', id);
-    return this.http.get<VideoItems>(`${this.searchVideosURL}`, { params })
-      .pipe(
-        map((response) => response.items),
-      );
+    return this.http
+      .get<VideoItems>(`${this.searchVideosURL}`, { params })
+      .pipe(map((response) => response.items));
   }
 
-  private savePagesToken(searchResponse: SearchVideoResponse) {
+  public savePagesToken(searchResponse: SearchVideoResponse) {
     const { nextPageToken, prevPageToken } = searchResponse;
-    this.store.dispatch(paginationAddInfoAction({
-      info: {
-        nextPageToken: nextPageToken || '',
-        prevPageToken: prevPageToken || ''
-      }
-    }))
+    this.store.dispatch(
+      paginationAddInfoAction({
+        info: {
+          nextPageToken: nextPageToken || '',
+          prevPageToken: prevPageToken || ''
+        }
+      })
+    );
   }
 }

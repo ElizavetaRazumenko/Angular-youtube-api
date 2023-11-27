@@ -5,7 +5,7 @@ import { MainCard } from 'src/app/redux/models/main.models';
   name: 'filterData'
 })
 export class FilterDataPipe implements PipeTransform {
-  sortingCards: MainCard[] = [];
+  private sortingCards: MainCard[] = [];
   public transform = (
     cards: MainCard[],
     isSortingTurn: boolean,

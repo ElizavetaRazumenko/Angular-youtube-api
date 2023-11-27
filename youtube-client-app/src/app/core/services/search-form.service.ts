@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
@@ -6,11 +5,8 @@ import {
   debounceTime,
   filter,
   Observable,
-  switchMap,
-  tap
+  switchMap
 } from 'rxjs';
-import { mainAddCardArrAction } from 'src/app/redux/actions/main.actions';
-import { MainCard } from 'src/app/redux/models/main.models';
 import VideoItems from 'src/app/search-responce/search-response.model';
 
 import { HttpVideoService } from '../../youtube/services/http/http-video.service';
@@ -24,7 +20,7 @@ interface IStateQuery {
   providedIn: 'root'
 })
 export class SearchFormService {
-  private stateQuery: BehaviorSubject<IStateQuery> = new BehaviorSubject({
+  public stateQuery: BehaviorSubject<IStateQuery> = new BehaviorSubject({
     value: '',
     length: 0
   });

@@ -8,7 +8,7 @@ export interface AdminCard {
   id: string;
 }
 
-export type AdminCardAddProps = Omit<AdminCard, 'id'>;
+export type AdminCardAddProps = AdminCard;
 
 export interface AdminState {
   admin: AdminCard[];

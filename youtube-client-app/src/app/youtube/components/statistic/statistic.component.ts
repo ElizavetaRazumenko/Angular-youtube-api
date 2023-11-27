@@ -10,5 +10,6 @@ import { DetailsService } from '../../services/details-page/details.service';
 })
 export class StatisticComponent {
   @Input() statistic!: Statistics;
+
   constructor(public service: DetailsService) {}
 }

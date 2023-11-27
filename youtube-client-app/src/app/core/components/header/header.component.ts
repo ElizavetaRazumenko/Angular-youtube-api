@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
   public routingAdminPage() {
     if (!this.isAuntUser) {
       this.router.navigate(['/login']);

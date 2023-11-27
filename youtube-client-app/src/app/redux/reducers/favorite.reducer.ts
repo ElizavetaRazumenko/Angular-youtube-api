@@ -1,4 +1,3 @@
-/* eslint-disable @ngrx/on-function-explicit-return-type */
 import { createReducer, on } from '@ngrx/store';
 
 import * as FavoriteActions from '../actions/favorite.actions';
@@ -13,14 +12,14 @@ export const favoriteReducer = createReducer(
   initialState,
   on(
     FavoriteActions.favoriteAddCardAction,
-    (state: FavoriteState, { card }) => ({
+    (state: FavoriteState, { card }): FavoriteState => ({
       ...state,
       favorite: [...state.favorite, card]
     })
   ),
   on(
     FavoriteActions.favoriteRemoveCardAction,
-    (state: FavoriteState, { id }) => ({
+    (state: FavoriteState, { id }): FavoriteState => ({
       ...state,
       favorite: [...state.favorite.filter((card) => card.id !== id)]
     })

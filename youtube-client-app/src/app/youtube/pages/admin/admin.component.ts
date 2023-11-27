@@ -1,6 +1,3 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable @ngrx/use-consistent-global-store-name */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
@@ -11,10 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { adminAddCardAction } from 'src/app/redux/actions/admin.actions';
-import { AdminCard } from 'src/app/redux/models/admin.models';
-import { selectAdminCard } from 'src/app/redux/selectors/admin.selectors';
 
 import { dataNotValid } from '../../validators/data.validator';
 
@@ -24,8 +18,6 @@ import { dataNotValid } from '../../validators/data.validator';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  card$: Observable<AdminCard[]> = this.store.select(selectAdminCard);
-
   public adminForm!: FormGroup<{
     title: FormControl<string | null>;
     description: FormControl<string | null>;
@@ -34,6 +26,7 @@ export class AdminComponent implements OnInit {
     date: FormControl;
     tags: FormArray;
   }>;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -80,12 +73,15 @@ export class AdminComponent implements OnInit {
     if (!this.adminForm.invalid) {
       this.store.dispatch(
         adminAddCardAction({
-          title: this.adminForm.value.title || '',
-          description: this.adminForm.value.description || '',
-          img: this.adminForm.value.img || '',
-          link: this.adminForm.value.link || '',
-          date: this.adminForm.value.date || '',
-          tags: this.formatTagsToArray(this.adminForm.value.tags)
+          card: {
+            title: this.adminForm.value.title || '',
+            description: this.adminForm.value.description || '',
+            img: this.adminForm.value.img || '',
+            link: this.adminForm.value.link || '',
+            date: this.adminForm.value.date || '',
+            tags: this.formatTagsToArray(this.adminForm.value.tags),
+            id: window.crypto.randomUUID()
+          }
         })
       );
     }

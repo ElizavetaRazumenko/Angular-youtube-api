@@ -1,5 +1,5 @@
 /* eslint-disable @ngrx/avoid-dispatching-multiple-actions-sequentially */
-/* eslint-disable class-methods-use-this */
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';

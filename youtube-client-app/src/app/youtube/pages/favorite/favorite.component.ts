@@ -10,7 +10,8 @@ import { selectFavoriteCard } from 'src/app/redux/selectors/favorite.selectors';
   styleUrls: ['./favorite.component.scss']
 })
 export class FavoriteComponent {
-  cards$: Observable<FavoriteCard[]> = this.store.select(selectFavoriteCard);
+  public cards$: Observable<FavoriteCard[]> =
+    this.store.select(selectFavoriteCard);
 
   constructor(private readonly store: Store) {}
 }

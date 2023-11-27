@@ -5,7 +5,7 @@ import { MainCard } from 'src/app/redux/models/main.models';
   name: 'filterWords'
 })
 export class FilterWordsPipe implements PipeTransform {
-  sortingCards: MainCard[] = [];
+  private sortingCards: MainCard[] = [];
   public transform = (cards: MainCard[], value: string) => {
     this.sortingCards = Array.from(cards);
     return this.sortingCards.filter((item) => {
