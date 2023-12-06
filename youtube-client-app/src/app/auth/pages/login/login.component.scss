@@ -1,88 +1,118 @@
-@import '../../../global.scss';
+@import '../../../../global.scss';
 
-.login_main {
-    margin: 50px auto;
-}
-
-.login_form {
-    box-sizing: border-box;
-    padding: 25px 20px;
-    margin: auto;
-    width: 350px;
+.login_container {
+    width: 100%;
     height: max-content;
-    display: flex;
-    flex-direction: column;
-    background-color: $login-background;
-    border-radius: 8px;
+    margin-top: 200px;
 
     .title {
-        color: $black;
-        font-size: 1.125rem;
+        text-align: center;
+        font-size: 2.5rem;
         font-weight: 700;
+        margin-bottom: 15px;
     }
 
-    .input_label {
-        margin-left: 10px;
-        color: $font-grey;
-        font-size: 0.685rem;
-        margin-bottom: 2px;
-    }
+    .login_form {
+        margin: 0 auto;
+        padding: 30px 35px;
+        width: 420px;
+        height: max-content;
+        background-image: url(../../../../assets/forms_bg.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 40px;
+        display: flex;
+        flex-direction: column;
+        border: 3px solid $main-black;
 
-    .input,
-    .input_error {
-        box-sizing: border-box;
-        padding: 0 10px;
-        border: none;
-        background-color: $input-background;
-        width: 305px;
-        height: 37px;
-        margin-bottom: 5px;
-    }
+        .input_container {
+            min-height: 60px;
+        }
 
-    .input_error {
-        border: 5px solid red;
-    }
+        label {
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
 
-    .button_login,
-    .button_disabled {
-        cursor: pointer;
-        margin-right: 10px;
-        border-radius: 5px;
-        margin-top: 25px;
-        align-self: flex-end;
-        border: none;
-        color: $white-color;
-        background-color: $blue-color;
-        width: 124px;
-        box-shadow: 5px 0px 3px $blue-color;
-        transition: .5s;
-        font-size: .75rem;
-        font-weight: 400;
-        height: 40px;
-
-        &:hover {
-            background-color: $blue-color-hover;
-            box-shadow: 5px 0px 3px $blue-color-hover;
+        input {
+            margin-bottom: 5px;
+            padding: 5px 15px;
+            font-size: 1rem;
+            border: none;
+            width: 100%;
+            height: 30px;
+            border-radius: 10px;
+            box-shadow: inset 2px 3px $main-grey;
         }
     }
-
-    .button_disabled {
-        cursor: not-allowed;
-        background-color: $grey-color;
-        box-shadow: 5px 0px 3px $grey-color;
-        &:hover {
-            background-color: $grey-color;
-            box-shadow: 5px 0px 3px $grey-color;
-        }
-    }
-
 }
 
-.error-container {
-    display: flex;
-}
 .error_message {
-    color: $red;
-    margin-left: 10px;
-    font-size: 0.6rem;
+    color: $main-red;
+    font-weight: 700;
+}
+
+.login_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .title_login {
+        text-align: center;
+    }
+
+    .button_register {
+        cursor: pointer;
+        text-decoration: underline;
+        border: none;
+        color: $main-black;
+        background-color: $main-white;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 1rem;
+        transition: .5s;
+
+        &:hover {
+            color: $main-grey;
+        }
+    }
+   
+}
+
+.button_submit,
+.button_submit_disabled {
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 1px 1px 4px .5px $main-black;
+    background-color: $main-white;
+    font-weight: 700;
+    font-size: 1.3rem;
+    transition: .5s;
+
+    &:hover {
+        background-color: $main-white-hover-button;
+    }
+}
+
+.button_submit_disabled {
+    cursor: auto;
+    color: $main-grey;
+
+    &:hover {
+        background-color: $main-white;
+    }
+}
+
+.alerts_wrapper {
+    position: absolute;
+    right: 30px;
+    top: 50px;
+    width: 350px;
+    height: max-content;
 }

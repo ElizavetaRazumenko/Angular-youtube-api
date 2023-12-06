@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "youtube-client-app": {
+    "connections": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/youtube-client-app",
+            "outputPath": "dist/connections",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -30,7 +30,6 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -66,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "youtube-client-app:build:production"
+              "browserTarget": "connections:build:production"
             },
             "development": {
-              "browserTarget": "youtube-client-app:build:development"
+              "browserTarget": "connections:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +76,26 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "youtube-client-app:build"
+            "browserTarget": "connections:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
           }
         },
         "lint": {
@@ -85,8 +103,7 @@
           "options": {
             "lintFilePatterns": [
               "src/**/*.ts",
-              "src/**/*.html",
-              "src/**/*.component.html"
+              "src/**/*.html"
             ]
           }
         }
@@ -94,7 +111,7 @@
     }
   },
   "cli": {
-    "analytics": "61276667-9fe6-402e-8bd7-c0641af9125b",
+    "analytics": "e00c3235-1d70-4515-921e-85795761f963",
     "schematicCollections": [
       "@angular-eslint/schematics"
     ]

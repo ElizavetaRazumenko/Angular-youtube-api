@@ -1,0 +1,12 @@
+<ng-container *ngIf="!groupList.isCustom">
+  <div class="group_wrapper">
+    <p class="group_name">Some Group</p>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="groupList.isCustom">
+  <div class="group_wrapper custom_group">
+    <p class="group_name">Some Group</p>
+    <button class="button_delete"><div class="delete_icon"></div></button>
+  </div>
+</ng-container>

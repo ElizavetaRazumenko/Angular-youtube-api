@@ -1,34 +1,25 @@
-import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { isDevMode, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { SharedModule } from '@shared/shared.module';
-
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
-import { MainEffects } from './redux/effects/main.effect';
 import { reducers } from './redux/reducers';
-import { YoutubeInterceptor } from './youtube/interseptors/youtube.interceptor';
-import { YoutubeModule } from './youtube/youtube.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
+import { ApplicationModule } from './application/application.module';
+import { StoreModule } from '@ngrx/store';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CoreInterceptor } from './core/interceptor/http.interceptor';
+import { EffectsModule } from '@ngrx/effects';
+import { ProfileEffects } from './redux/effects/profile.effect';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    CommonModule,
     BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CoreModule,
-    SharedModule,
-    YoutubeModule,
     AppRoutingModule,
+    AuthModule,
+    CoreModule,
+    ApplicationModule,
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,
@@ -37,11 +28,10 @@ import { YoutubeModule } from './youtube/youtube.module';
         strictActionSerializability: true
       }
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([MainEffects])
+    EffectsModule.forRoot([ProfileEffects])
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: YoutubeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: CoreInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

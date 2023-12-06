@@ -1,0 +1,74 @@
+<div class="groups_list">
+  <p class="title">Groups</p>
+  <div class="update_wrapper">
+    <div class="timer">
+      <span>00</span>
+      <span>:</span>
+      <span>00</span>
+    </div>
+    <button class="button">Update</button>
+  </div>
+
+  <button class="button_create" (click)="toggleTheFormMode()">
+    <div class="create_icon"></div>
+    <p class="main_text">Create a new group</p>
+  </button>
+  <ng-container *ngIf="isFormMode">
+    <form [formGroup]="createGroupForm" class="form">
+      <p class="main_text form_title">Enter the name of the new group</p>
+      <div class="input_wrapper">
+        <input
+          formControlName="name"
+          class="input_name"
+          type="text"
+          id="name" />
+        <div
+          *ngIf="
+                name.invalid &&
+                (name.dirty || name.touched)
+              ">
+          <span
+            *ngIf="
+                  name.errors &&
+                  name.errors['required']
+                "
+            class="error_message"
+            >Please enter a group name</span
+          >
+          <span
+            *ngIf="
+                name.errors &&
+                name.errors['nameNotValid'] && 
+                name.errors['nameNotValid'].value 
+          "
+            class="error_message"
+            >{{ name.errors['nameNotValid'].message }}</span
+          >
+          <span
+            *ngIf="
+                name.errors &&
+                name.errors['maxlength']
+              "
+            class="error_message"
+            >Maximum 30 characters allowed</span
+          >
+        </div>
+      </div>
+
+      <div class="buttons_wrapper">
+        <button class="button form_button">Create</button>
+        <button
+          type="button"
+          class="button form_button"
+          (click)="toggleTheFormMode()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </ng-container>
+  <div class="groups-list_wrapper" *ngIf="TESTGroupsItems.length">
+    <ng-container *ngFor="let group of TESTGroupsItems">
+      <app-group [groupList]="group"></app-group>
+    </ng-container>
+  </div>
+</div>

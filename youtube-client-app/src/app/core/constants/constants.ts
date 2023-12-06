@@ -1,2 +1,0 @@
-export const MIN_INPUT_VALUE_LENGTH = 3;
-export const MIN_SUBMIT_FORM_VALUE_LENGTH = 0;
