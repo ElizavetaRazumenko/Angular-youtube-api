@@ -1,0 +1,35 @@
+<div
+  *ngIf="itemCard"
+  class="item"
+  appHighlight
+  [publishAt]="itemCard.publishedAt">
+  <div class="thumbnails-wrapper">
+    <img [src]="itemCard.defaultURL" alt="thumbnail" class="thumbnail" />
+  </div>
+  <div class="info-block">
+    <div class="viewes">
+      <div class="icon-viewes"></div>
+      <p class="count">{{ itemCard.viewCount }}</p>
+    </div>
+    <div class="likes">
+      <div class="icon-likes"></div>
+      <p class="count">{{ itemCard.likeCount }}</p>
+    </div>
+    <div class="dislikes">
+      <div class="icon-dislikes"></div>
+      <p class="count">{{ itemCard.favoriteCount }}</p>
+    </div>
+    <div class="comments">
+      <div class="icon-comments"></div>
+      <p class="count">{{ itemCard.commentCount }}</p>
+    </div>
+  </div>
+  <p class="video-title">{{ itemCard.title }}</p>
+  <button class="add-to-fav_btn" (click)="removeFromFavorites()">
+    <div class="icon-fav"></div>
+    Remove from favorites
+  </button>
+  <app-custom-button [className]="'item-button button'"
+    >more...</app-custom-button
+  >
+</div>

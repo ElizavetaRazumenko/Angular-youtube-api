@@ -1,0 +1,18 @@
+<div class="buttons-container">
+  <p class="text-pointer">Sorting by:</p>
+  <button
+    mat-basic-button
+    color="basic"
+    class="sort-button"
+    (click)="turnOnSortingData()">
+    <ng-content select="span"></ng-content>
+  </button>
+  <button
+    mat-basic-button
+    color="basic"
+    class="sort-button"
+    (click)="turnOnSortingViews()">
+    <ng-content></ng-content>
+  </button>
+  <p class="word-sort">by word or sentance</p>
+</div>

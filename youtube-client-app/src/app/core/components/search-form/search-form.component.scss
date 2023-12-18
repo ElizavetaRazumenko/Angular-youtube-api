@@ -1,0 +1,15 @@
+@import '../../../global.scss';
+
+.search-form {
+    display: flex;
+    min-width: 476px;
+    max-height: 24px;
+
+    .search-input {
+        flex-grow: 1;
+        border: none;
+        background-color: $input-color;
+        font-size: .75rem;
+        padding-left: 10px;
+    }
+}

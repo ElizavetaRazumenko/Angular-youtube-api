@@ -1,0 +1,27 @@
+@import '../../../global.scss';
+
+.main_error {
+    margin: 350px auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .not_found_icon {
+        width: 100px;
+        height: 100px;
+        background-image: url('../../../../assets/404.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    .error_content {
+        margin-left: 20px;
+        max-width: 234px;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: $font-grey;
+        line-height: 28px;
+        letter-spacing: 1px;
+    }
+}

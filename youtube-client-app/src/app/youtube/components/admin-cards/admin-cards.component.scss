@@ -1,0 +1,98 @@
+@import '../../../global.scss';
+
+.container {
+    margin: 0 auto;
+    padding: 30px 0;
+    max-width: 1150px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.item {
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 264px;
+    height: 327px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $background-color;
+    box-shadow: 3px 0px 2px $background-color;
+    border-radius: 5px;
+    border-bottom: 8px solid green;
+
+    .thumbnails-wrapper {
+        width: 223px;
+        height: 123px;
+        background-color: pink;
+
+        .thumbnail {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.count {
+    font-size: 0.625rem;
+    margin: 0;
+    margin-left: 5px;
+}
+
+
+.video-title,
+.video-description {
+    color: #4F4F4F;
+    font-size: 1rem;
+    font-weight: 700;
+    align-self: flex-end;
+    margin-right: 10px;
+}
+
+.video-description {
+    font-weight: 400;
+    font-size: .7rem;
+}
+
+.link {
+    font-size: .7rem;
+    margin: 5px 0;
+    align-self: flex-start;
+}
+
+.remove_card_btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    border: none;
+    background-color: $background-color;
+    color: $black;
+    transition: .5s;
+
+    &:hover {
+        color: $font-grey;
+    }
+}
+
+.icon-urn {
+    background-image: url('../../../../assets/urn.png');
+    width: 15px;
+    height: 20px;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.link {
+    text-decoration: none;
+    color: $black;
+    transition: .5s;
+
+    &:hover {
+        color: $font-grey;
+    }
+}

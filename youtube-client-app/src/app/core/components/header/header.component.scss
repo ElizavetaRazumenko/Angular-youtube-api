@@ -1,69 +1,87 @@
-@import '../../../../global.scss';
+@import '../../../global.scss';
 
-.header_container {
-    margin: 0;
-    min-width: 1280px;
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0px 5px 17px 2px $main-shadow;
-    background-color: $main-black;
+.header {
+    width: 100%;
+    background-color: $background-color;
 
-    .nav_bar {
-        width: 50%;
-        height: 100%;
-    }
-
-    .nav_items {
-        margin: 0;
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
+    .header-main {
+        display: grid;
+        height: 80px;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: "login search user"
+        "admin search favorite";
         align-items: center;
-        padding-right: 50px;
-
-        li,
-        .nav_button {
+        
+      
+        .button_login, 
+        .button_admin {
             cursor: pointer;
-            padding-bottom: 2px;
-            color: $main-white;
-            text-decoration: none;
-            list-style-type: none;
-            font-size: 1.1rem;
-            font-weight: 700;
-            transition: .4s;
+            justify-self: flex-end;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            height: 25px;
+            width: 90px;
+            border-radius: 5px;
+            align-self: flex-end;
             border: none;
-            background-color: $main-black;
-        }
-
-        .nav_button.disabled {
-            cursor: auto;
-            color: $main-grey;
-
+            color: $white-color;
+            background-color: $blue-color;
+            box-shadow: 5px 0px 3px $blue-color;
+            transition: .5s;
+            font-size: .75rem;
+            font-weight: 400;
+    
             &:hover {
-                color: $main-grey;
+                background-color: $blue-color-hover;
+                box-shadow: 5px 0px 3px $blue-color-hover;
             }
         }
 
-        li:hover,
-        .nav_button:hover {
-            color: $main-white-hover;
+        .button_admin {
+            grid-area: admin; 
+            color: $black;
+            width: 110px;
+            margin-right: 0;
+            background-color: $background-color;
+            box-shadow: none;
+            &:hover {
+                color: $font-grey;
+                background-color: $background-color;
+                box-shadow: none;
+            }
         }
 
-        .active {
-            text-decoration: underline $main-azure 3px;
-            color: $main-white-hover;
+        .search-block {
+            grid-area: search; 
+            justify-self: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 570px;
+        }
+
+        .user {
+            grid-area: user; 
+        }
+
+        .favorite {
+            cursor: pointer;
+            grid-area: favorite;
+            margin-left: 25px;
+            width: 25px;
+            height: 25px;
+            background-image: url('../../../../assets/fav.png');
+            background-repeat: no-repeat;
+            background-size: contain; 
+        }
+        .favorite_btn {
+            border: none;
+            background-color: $background-color;
         }
     }
-
 }
 
-
-.alerts_wrapper {
-    position: absolute;
-    right: 30px;
-    top: 50px;
-    width: 350px;
-    height: max-content;
+.hidden {
+    display: none;
 }

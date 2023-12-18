@@ -1,13 +1,15 @@
 import { FormControl } from '@angular/forms';
-import { MIN_PASS_LENGTH } from 'src/app/constants/constants';
+
+import { MAX_PASS_LENGTH } from '../constants/constants';
 
 export function passwordNotStrength(control: FormControl) {
   if (control.value !== null && control.value !== '') {
-    if (control.value.length < MIN_PASS_LENGTH) {
+    if (control.value.length < MAX_PASS_LENGTH) {
       return {
         passwordNotStrength: {
           value: true,
-          message: 'Password must be at least 8 characters long'
+          message:
+            'Password is not strong enough: must be at least 8 characters long'
         }
       };
     }
@@ -15,7 +17,17 @@ export function passwordNotStrength(control: FormControl) {
       return {
         passwordNotStrength: {
           value: true,
-          message: 'Password must contain one capital letter'
+          message:
+            'Password is not strong enough: must contain at least one capital letter'
+        }
+      };
+    }
+    if (!control.value.match(/[a-z]/)) {
+      return {
+        passwordNotStrength: {
+          value: true,
+          message:
+            'Password is not strong enough: must contain at least one capital letter'
         }
       };
     }
@@ -23,7 +35,8 @@ export function passwordNotStrength(control: FormControl) {
       return {
         passwordNotStrength: {
           value: true,
-          message: 'Password must contain one digit'
+          message:
+            'Password is not strong enough: must contain at least one number'
         }
       };
     }
@@ -31,7 +44,8 @@ export function passwordNotStrength(control: FormControl) {
       return {
         passwordNotStrength: {
           value: true,
-          message: 'Password must contain one special character'
+          message:
+            'Password is not strong enough: must contain at least one special character'
         }
       };
     }

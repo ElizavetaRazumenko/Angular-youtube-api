@@ -1,0 +1,109 @@
+@import '../../../global.scss';
+
+.item {
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 264px;
+    height: 327px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $background-color;
+    box-shadow: 3px 0px 2px $background-color;
+    border-radius: 5px;
+    border-bottom: 8px solid green;
+
+    .thumbnails-wrapper {
+        width: 223px;
+        height: 123px;
+        background-color: pink;
+    
+        .thumbnail {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.info-block {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.viewes,
+.likes,
+.dislikes,
+.comments {
+    display: flex;
+    align-items: center;
+}
+
+.count {
+    font-size: 0.625rem;
+    margin: 0;
+    margin-left: 5px;
+}
+
+.icon-viewes,
+.icon-likes,
+.icon-dislikes,
+.icon-comments {
+    width: 15px;
+    height: 13px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-viewes {
+    width: 20px;
+    background-image: url('../../../../assets/viewed.svg');
+}
+
+.icon-likes {
+    background-image: url('../../../../assets/liked.svg');
+}
+
+.icon-dislikes {
+    background-image: url('../../../../assets/dislike.svg');
+}
+
+.icon-comments {
+    width: 13px;
+    background-image: url('../../../../assets/comment.svg');
+}
+
+.video-title {
+    color: #4F4F4F;
+    font-size: 1rem;
+    font-weight: 700;
+    align-self: flex-end;
+    margin-right: 10px;
+}
+
+.add-to-fav_btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    border: none;
+    background-color: $background-color;
+    color: $black;
+    transition: .5s;
+
+    &:hover {
+        color: $font-grey;
+    }
+}
+.icon-fav {
+    background-image: url('../../../../assets/liked.svg');
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

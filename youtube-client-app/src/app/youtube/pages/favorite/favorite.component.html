@@ -1,0 +1,10 @@
+<div class="favorite" *ngIf="cards$ | async as cards">
+  <ng-container *ngFor="let card of cards">
+    <app-favorite-cards [itemCard]="card"></app-favorite-cards>
+  </ng-container>
+</div>
+<div class="container" *ngIf="cards$ | async as cards">
+  <ng-container *ngIf="!cards.length">
+    <p class="title">No favorites videos</p>
+  </ng-container>
+</div>

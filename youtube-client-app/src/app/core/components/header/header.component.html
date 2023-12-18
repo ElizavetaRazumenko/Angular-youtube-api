@@ -1,45 +1,25 @@
-<div class="header_container">
-  <app-logo (click)="goToTheMain()"></app-logo>
-  <nav class="nav_bar">
-    <ul class="nav_items">
-      <li>
-        <button
-          [class]="currentURl === '/' ? 'nav_button active' : 'nav_button'"
-          (click)="goToTheMain()">
-          Main
-        </button>
-      </li>
-      <li>
-        <button
-          [class]="currentURl === '/profile' ? 'nav_button active' : 'nav_button'"
-          (click)="goToTheProfile()">
-          Profile
-        </button>
-      </li>
-      <li>
-        <button class="nav_button">Groups</button>
-      </li>
-      <li>
-        <button class="nav_button">Conversations</button>
-      </li>
-      <ng-container *ngIf="isUserAuth$ | async as isUserAuth">
-        <ng-container *ngIf="isUserAuth">
-          <li>
-            <button
-              [class]="isLogoutButtonClicked ? 'nav_button disabled' :  'nav_button'"
-              (click)="Logout()">
-              Logout
-            </button>
-          </li>
-        </ng-container>
-      </ng-container>
-    </ul>
-  </nav>
-
-  <div class="alerts_wrapper" *ngIf="notifyArray.length">
-    <app-alert
-      *ngFor="let notify of notifyArray"
-      [notifyInfo]="notify"
-      (eventDeleteNotify)="deleteNotify($event)"></app-alert>
+<div class="header">
+  <div class="header-main">
+    <ng-container *ngIf="buttonLogTextContent$ | async as buttonLogTextContent">
+      <button class="button_login" (click)="loginAutorization()">
+        {{ buttonLogTextContent }}
+      </button>
+    </ng-container>
+    <button class="button_admin" (click)="routingAdminPage()">
+      To Admin Page
+    </button>
+    <div class="search-block">
+      <app-logo></app-logo>
+      <app-search-form></app-search-form>
+      <app-settings-button
+        (click)="changeFilterVisability()"></app-settings-button>
+    </div>
+    <app-user-data class="user"></app-user-data>
+    <button class="favorite_btn" (click)="routingFavoritePage()">
+      <div class="favorite"></div>
+    </button>
   </div>
+  <ng-container *ngIf="isFilterVisible">
+    <app-filtering-block></app-filtering-block>
+  </ng-container>
 </div>
